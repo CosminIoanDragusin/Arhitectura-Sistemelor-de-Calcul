@@ -1,0 +1,191 @@
+15.	Sa se scrie o functie recursiva three-multiples-sum care primeste ca parametru o lista 
+formata din numere intregi pozitive si calculeaza suma numerelor divizibile cu 3. 
+Inputul functiei se considera a fi corect. Daca nici un numar nu e multiplu de 3, suma va fi 0.
+
+(defun three-multiples-sum (l)
+  (cond ((null l) (return-from three-multiples-sum 0))
+        ( (= (mod (car l) 3) 0) (+ (car l) (three-multiples-sum (cdr l))))
+        (t (three-multiples-sum (cdr l)))
+  )
+)
+
+(setq l '(2 3 4 6))
+(print (three-multiples-sum l))
+
+16.	Aceeasi cerinta ca mai sus – varianta nerecursiva.
+(defun three-multiples-sum (l)
+    (setq s 0)
+    (loop for i in l do
+        (if (= (mod i 3) 0) (setq s (+ s i)))
+    )
+    (return-from three-multiples-sum s)
+)
+
+(setq l '(1 2 3 6 9 3))
+(print (three-multiples-sum  l))
+
+17.	Sa se scrie o functie recursiva my-nth care primeste ca parametri o lista si un numar intreg 
+nenegativ n si care returneaza elementul aflat pe pozitia n in lista data ca argument. 
+Nu este permisa folosirea functiei nth. Se va verifica daca n este cuprins intre 0 si lungime_lista – 1, 
+in caz contrar afisandu-se un mesaj de eroare corespunzator.
+(defun my-nth (l n)
+  (cond ((> n (- (length l) 1)) (return-from my-nth "eroare"))
+        ( (< n 0) (return-from my-nth "eroare"))
+        ( (= n 0) (return-from my-nth (car l)))
+        ( (= n (length l)) (return-from my-nth (car l)) )
+        (t (my-nth (cdr l) (- n 1)))
+  )
+)
+
+(setq l '(2 3 4 6))
+(print (my-nth l 3))
+
+iterativ
+
+(defun my-nth (l n)
+  (cond ((> n (- (length l) 1)) (return-from my-nth "eroare"))
+        ( (< n 0) (return-from my-nth "eroare"))
+  )
+ 
+  (loop for i from 0 to (- n 1) do
+    (setq l (cdr l)) 
+  )
+  (return-from my-nth (car l))
+)
+
+(setq l '(2 3 4 6))
+(print (my-nth l 1))
+
+18.	Sa se scrie o functie nerecursiva my-power care primeste ca parametri doua numere n si k  
+si returneaza rezultatul ridicarii lui n la puterea k. Daca n=0 si k=0 se va afisa un mesaj de eroare,
+ deoarece cazul este imposibil. Nu se va folosi functia expt din Lisp, ci se va realiza o implementare proprie. 
+ Sa se realizeze verificarea daca argumentele functiei sunt numere intregi pozitive, 
+ in caz contrar afisandu-se un mesaj de eroare corespunzator.
+ 
+ (defun my-power (n k)
+(setq p 1)
+  (cond ((NOT (integerp n)) (return-from my-power "eroare n"))
+        ((< n 0) (return-from my-power "eroare n"))
+        ((NOT (integerp k)) (return-from my-power "eroare k"))
+        ((< k 0) (return-from my-power "eroare k"))
+        ((AND (= n 0) (= k 0)) (return-from my-power "eroare 0"))
+        ( (= n 0) (return-from my-power 0) )
+        (( = k 1) (return-from my-power n))
+  )
+  (loop for i from 1 to k do
+    (setq p (* p n))
+  )
+  (return-from my-power p)
+)
+
+(setq l '(2 3 4 6))
+(print (my-power 3 3))
+ 
+ recursiva
+ (defun my-power (n k)
+  (cond ((NOT (integerp n)) (return-from my-power "eroare n"))
+        ((< n 0) (return-from my-power "eroare n"))
+        ((NOT (integerp k)) (return-from my-power "eroare k"))
+        ((< k 0) (return-from my-power "eroare k"))
+        ((AND (= n 0) (= k 0)) (return-from my-power "eroare 0"))
+        ( (= n 0) (return-from my-power 0) )
+        (( = k 1) (return-from my-power n))
+        (t (* n (my-power n (- k 1))))
+  )
+)
+
+(setq l '(2 3 4 6))
+(print (my-power 3 3))
+
+19.	Sa se scrie o functie replicate care primeste doua argumente, un numar intreg nenegativ n si un element elem 
+si care returneaza o lista de n elemente elem, fara a folosi functia make-list din Lisp. Se va verifica de asemenea 
+ca n este un numar intreg mai mare decat zero, in caz contrar afisandu-se un mesaj corespunzator. Daca n este 0 se va
+returna lista vida. Se va folosi o structura de control la alegere pentru bucla din acest program
+
+(defun replicate (n elem)
+  (cond ((< n 0) (return-from replicate "eroare"))
+        ((= n 0) (return-from replicate '()))
+  )
+  (setq rez '())
+  (loop for i from 1 to n do
+    (setq rez (append (list elem) rez))
+  )
+  (return-from replicate rez)
+)
+
+(setq l '(2 3 4 6))
+(print (replicate 0 3))
+
+recursiv:
+
+(defun replicate-rec (n elem)
+  (cond ((< n 0) (return-from replicate-rec "eroare"))
+        ((= n 0) (return-from replicate-rec '()))
+        ( t (append (list elem) (replicate-rec (- n 1) elem)))
+  )
+)
+
+(setq l '(2 3 4 6))
+(print (replicate-rec 4 3))
+
+
+20.	Sa se scrie o functie loto care primeste ca parametru 2 numere n si limita si care returneaza o lista de n numere mai mici 
+decat limita. Se va verifica daca n si limita sunt numere intregi pozitive, in caz contrar afisandu-se un mesaj de eroare 
+corespunzator. Daca argumentele functiei nu sunt numere, se va afisa un mesaj de eroare corespunzator. 
+Numerele sunt generate aleator, si rezultatul e returnat sub forma de lista.
+
+(defun loto (n limita)
+    (cond ((NOT(integerp n)) (return-from loto "eroare"))
+          ((NOT (numberp n)) (return-from loto "eroare"))
+          ((< n 0) (return-from loto "eroare"))
+          ((NOT(integerp limita)) (return-from loto "eroare"))
+          ((NOT (numberp limita)) (return-from loto "eroare"))
+          ((< limita 0) (return-from loto "eroare"))
+    )
+    (setq rez '())
+    (loop for i from 1 to n do
+         (setq rez (append rez (list (random limita))))
+    )
+    (return-from loto rez)
+)
+
+(setq l '(1 2 3 6 9 3))
+(print (loto 30 10))
+
+
+(defun loto (n limita)
+    (cond ((NOT(integerp n)) (return-from loto "eroare"))
+          ((NOT (numberp n)) (return-from loto "eroare"))
+          ((< n 0) (return-from loto "eroare"))
+          ((NOT(integerp limita)) (return-from loto "eroare"))
+          ((NOT (numberp limita)) (return-from loto "eroare"))
+          ((< limita 0) (return-from loto "eroare"))
+    )
+    (setq rez '())
+    (loop for i from 1 to n do
+        (if (< i limita) (setq rez (append rez (list i))))
+    )
+    (return-from loto rez)
+)
+
+21.	Sa se scrie o functie flatten-list care primeste ca parametru o lista si care elimina parantezele 
+sublistelor interioare. Fiecare sublista va fi inlocuita cu elementele ei. Functia va fi nerecursiva
+(defun flatten-list (l)
+  (cond ((null l) nil)
+        ((atom l) (list l))
+        (t (loop for a in l appending (flatten-list a))))
+)
+
+(setq l '(2 (3 (4 ) 6 (((5))))))
+(print (flatten-list l))
+
+recursiva
+(defun flatten (L)
+(cond ((null L) nil)
+      ((atom (first L)) (cons (first L) (flatten (rest L))))
+      (t (append (flatten (first L)) (flatten (rest L))))
+)
+)
+
+(setq l '(2 (3 (4 ) 6 (((5))))))
+(print (flatten l))

@@ -1,0 +1,47 @@
+Partea de LISP
+
+1.Sa se returneze o functie care verifica daca paramtrul e prim sau nu
+Returneaza 0 daca nu e prim si daa daca e prim
+R:
+(defun prim (x)
+(setq n(/x 2))
+(loop i from 2 to n
+(cond ((=(mod x i)0)(retun-from prim))
+)
+(print "daa")
+)
+
+2.Sa se scrie o functie recursiva care primeste ca param 2 nr n si k 
+Returneaza rezultatul ridicarii lui n la k.Daca n=0 si k=0 mesaj de eroare
+
+3.Sa se scrie o functie recursiva care primeste ca param o lista formata din nr intregi
+si calculeaza suma numerelor divizibile cu 5
+
+4.Care e functia prin care evaluarea secventiala a formelor poate fi parasita
+R:return-from??
+
+5.Ce functie returneaza t daca obiectul e un nr in lisp?
+R:(numberp<object>)??
+
+6.Ce afiseaza secventa urm:
+(loop for i in '(1 6 8 10 18) if ((NOT(=(mod i 2)0))sum i)
+R:1-suma nr impare??
+
+7.Ce fct atribuie simbolului a val 3?
+R:(setq a 3)??
+
+8.Functia (minusp -20 4 8 8 1) returneaza
+R:
+
+9.In lisp functia care returneaza t daca <object> este o celula CONS altfel nil:
+(consp <object>)??
+
+10.elem 12 din (((1 2(3)4((5(6(7 8)))(9(10)((11 (12(13))))))14)((15)16))
+(car(car(cdr(car(car(cdr(cdr(car(cdr(car(cdr(car)))))))))))))
+
+11.(((A B(C) D))(E(F G H))((I(J)))(K(L M)))
+PT C (CAR(CAR(CDR(CDR(CAR(cAR(car )))))))
+
+
+
+

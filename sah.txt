@@ -1,0 +1,47 @@
+Rezumat sah
+ 
+In start game in clasa BOARD se face schimbul de ture intre jucatori
+cand e randul lui IA,se apeleaza functia de Init(prin getNextMove)
+in Init se stabileste adancimea arborelui de minimax
+cream un arbore care are ca root nod in prima mutare tabla initiala si 
+dupa calculeaza care maximizeaza e jucatorul alb si care minimizeaza e 
+jucatorul negru
+dupa se apeleaza minimaxul pe tabla respectiva cu adancimea noastra 
+(-999,999) si jucatorul care maximizeaza
+
+
+In minimax se verifca daca am ajuns la adancimea 0 sau dac nu e nicio 
+mutare posibila caz in care intoarce ultima val buna
+sau verifica daca e alb ia val minima a nodului si pentru fiecare mutare 
+posibila pe care o poate face albul se cauta cea mai buna val a lui 
+reapeland minimaxul
+
+Pentru primul if(maximizingPlayer) din minimax gandeste pentru alb 
+-incearca sa maximizeze
+ex:daca albul poate sa mute un cal un pion si o regina si calul poate sa 
+ia o piesa prin mutarea lui
+calculeaza cu 4 mutari inainte pentru pion si aproximeaza cand poate sa 
+ia o piesa si mutarile adversarului
+dupa se intoarce si calculeaza si pentru cal si vede ca el poate sa ia 
+direct o piesa neagra si se gandeste ce poate sa faca negrul si dupa se 
+gandeste 
+la mutarea albului dupa vea a negrului
+dupa din nou se intoarce si vine mutarea cu regina si anticipeaza iar si 
+verifica ce e bun pentru alb
+la final verifica val data de piesele albe-piesele negre
+-vede ca la mutarea cu calul e 1 in loc de 0 pentru ca s-a luat o piesa 
+neagra de pe tabla si de aici isi da seama ca e mai bine sa mute calul
+
+
+AL 2 lea if din minimax-Cand intra aici gandeste pentru negru-minimizare
+ex:vine cu o mutare si calculeaza toate mutarile posibile pentru acea 
+piesa in functie de scorul tablei
+vede ca in 2 mutari poate lua reginaa de la alb sau in mutarea asta 
+poate lua tura de la alb
+daca adancimea=4 intra pe else si vede mutarile posibile dupa intra si 
+calculeaza pe primul if de la minimax(pentru alb) si se intoarce la 
+mutarea negrului
+daca poate lua regina face 0-9=>un scor de -9 la finalul celor 3 mutari
+pentru a lua regina si e mai buna decat cea a luarii turei care era -5
+
+Functia addChild incarca tabla dupa ce o mutat piesa(redeseneaza tabla aia dupa mutarea ambiilor)

@@ -1,0 +1,157 @@
+1.
+RECURSIV
+(defun invers (l)
+    (cond ( (null l) () )
+        ( t (append  (invers (cdr l)) (list (car l))  ))
+    )
+)
+
+(setq l '(1 2 3 4))
+(print (invers l))
+
+var 2
+(defun inversa (l)
+    (if (null l) 
+            '()
+            (append (inversa (rest l)) (list (first l)))
+    )
+)
+(setq l '(5 4 2 3 5))
+(print (inversa l))
+
+(print (rest l)) = cdr
+ITERATIV
+(defun invers (l)
+(SETQ REZ '())
+    (loop for i in l do
+      (setq rez (append (list i) rez ))
+    )
+    (return-from invers REZ)
+)
+
+(setq l '(1 2 3 4))
+(print (invers l))
+
+2.	Sa se scrie o functie recursiva my-sum care primeste ca parametru un numar intreg n si returneaza
+ suma numerelor de la 0 la n. In cazul in care n este negativ, se va afisa un mesaj de eroare corespunzator.
+ 
+ RECURSIV
+ (defun my-sum  (x)
+    (cond ((< x 0) (print "negativ"))
+          ((= x 0) 0)
+          (t (+ x (my-sum  (- x 1))))
+    )
+)
+
+(setq l 5)
+(print (my-sum  l))
+(setq l -5)
+(print (my-sum  l))
+
+iterativ
+ (defun my-sum  (x)
+ (setq s 0)
+    (if (< x 0) (print "negativ"))
+    ( loop for i from 1 to x do
+        (setq s (+ i s))
+    )
+    (print s)
+)
+
+(setq l 5)
+(my-sum  l)
+
+ 3.	Sa se scrie o functie nerecursiva my-sum-iterative care indeplineste cerintele de la problema anterioara.
+ 
+(defun my-sum-iterative  (l)
+(setq sum 0)
+    (if (< l 0) (print "negativ") 
+        (progn 
+            (loop for i from 1 to l do
+                (setq sum (+ i sum))
+            )
+            (print sum) 
+        )
+     )
+)
+
+(setq l 5)
+(my-sum-iterative  l)
+
+4.	Sa se scrie o functie recursiva my-minimum care primeste ca parametru o lista si returneaza elementul minim din aceasta.
+ Daca lista nu este corect formata (contine si litere, alte liste etc.), atunci se va afisa un mesaj corespunzator. 
+ Daca lista este vida, se va afisa un mesaj corespunzator.
+ 
+ ----var 1
+
+ (defun check  (l)
+ (setq ok t)
+    (loop for i in l do
+        (cond ( (NOT (numberp i)) (setq ok nil))
+              ( (listp i) (setq ok nil))
+        )
+    )
+(return-from check ok)
+)
+
+(defun my-minimum  (x)
+    (cond ((NOT (check x)) (progn (print "lista nu este ok") (return)))
+          ((null x) (print "lista goala"))
+          ((null (rest x)) (first x))
+          ( (< (first x) (my-minimum (rest x))) (first x))
+          (t (my-minimum (rest x)))
+    )
+)
+
+(setq l '( 5 (6) 1 2 9))
+(print (my-minimum l))
+
+-- returnare direct la check var 2
+ (defun check  (l)
+    (loop for i in l do
+        (cond ( (NOT (numberp i)) (return-from check nil))
+              ( (listp i) (return-from check nil))
+        )
+    )
+(return-from check t)
+)
+----var 2
+(defun minim (l)
+    (if (null l) (print "lista goala")
+         (my-minimum l (car l))
+    )
+)
+
+ (defun my-minimum  (l m)
+    (cond ((null l) m)
+          ( (< (first l) m) (my-minimum (cdr l) (car l)))
+          (t (my-minimum (cdr l) m))
+    )
+)
+
+(setq l '( 5 6 1 2 9))
+(print (minim l))
+
+5.	Sa se scrie o functie recursiva my-length care primeste ca parametru o lista si calculeaza lungimea acesteia,
+ fara a folosi functia length din Lisp
+ 
+  (defun my-length  (l)
+    (cond ((null l) 0)
+          (t (+ 1 (my-length (cdr l))))
+    )
+)
+
+(setq l '( 5 6 1 2 9))
+(print (my-length l))
+
+iterativa:
+(defun my-length-IT  (l)
+(setq s 0)
+ (loop for i in l do 
+   (setq s (+ 1 s))
+ )
+ (return-from my-length-IT s)
+)
+
+(setq l '( 5 6 1 2 9))
+(print (my-length-IT l))

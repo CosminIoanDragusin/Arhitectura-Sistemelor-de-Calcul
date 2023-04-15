@@ -1,0 +1,139 @@
+FUNCTIILE PREDEFINITE IN LISP, APELARE:
+REGULA:
+( NUMELE_FUNCTIEI PARAM1 PARAM2 ....) -> !!!! nu uitati de cele 2 paranteze !!!
+EG:
+suma a 2 numere -> in lisp este !! SUM(doar in for) sau + ca si functie
+APELARE:
+PENTRU AFISARE -> AVEM FUNTIA (print parametru)
+afisare suma a 2 numere apelare:
+(print (+ 1 2))
+
+FUNCTIE CU 1 SG PARAMETRU:
+eg: NOT -> negare booleana
+apelare
+(print (NOT ( = 2 3)))
+
+VALORILE BOOLEANE
+T = true
+nil = false
+
+1.
+definitie la condition:
+(cond (conditie_1 return_conditie_1)
+       (conditie_2 return_conditie_2)
+	   *****
+	   (t return_caz_default ( ca la switch cazul default))
+)
+
+(setq l1 '(1 2 3 4))
+(setq l2 '( 3 4 5))
+(print l1)
+( defun comapara (l1 l2)
+ (cond ( (> (length l1) (length l2)) 1)
+       ( ( < (length l1) (length l2)) 0)
+	   ( t -1)
+     )
+)
+
+
+setara variabile
+(setq lungime1 (length l1))
+(setq lumgime2 (length l2))
+
+( defun comapara (l1 l2)
+(setq lungime1 (length l1))
+(setq lumgime2 (length l2))
+ (cond ( (> lungime1 lumgime2) 1)
+       ( ( < lungime1 lumgime2) 0)
+	   ( t -1)
+)
+
+apel:
+(setq l1 '(1 2 3))
+(setq l2 '(4 5))
+(print (compara l1 l2))
+
+diferenta intre apel cu ' si fara
+(setq test1 (length l1))
+(setq test2 '(length l1))
+(print test1)
+(print test2)
+
+2.
+(defun egale (l1)
+  (setq element (car l1))
+  (loop for x in l1 do
+    (if (NOT (= element x) )  
+        (progn
+            (setq value nil)
+            (return)
+        )
+        (setq value t)
+     )
+   )
+    (print value)
+ )
+ 
+ (egale '(1 2 1))
+ 
+ TIPURI DE RETURN DIN FUNCTI:
+ 1. return -> poate fi folosit ca si break in loop
+ 2. return-from
+ 3. return-from nume_functie
+SE SCRIU intre paranteze eg: (return 1)
+ 
+DEFINITIE IF:
+(if (conditie de testat) return_TRUE return_FALSE) -> return_FALSE poate lipse
+
+3. functie care afiseaza toate numerele pare de la 1 la nr
+ (defun pare(nr)
+	(loop for x from 1 to nr do
+	   (if (evenp x) (print x))
+	)
+)
+(pare 20)
+
+6.
+CONDITION:
+(cond ( (conditie_1) return_true)
+	   ( (conditie_2) return_true)
+	   ******
+	   (t retrun_default)
+) => ca un switch sau un if else
+A. 
+factorial recursiv
+(defun factorial_rec (x)
+    ( cond  ((< x 0) 1)
+            ((= x 0) 1)
+            ( t (* x (factorial_rec (- x 1))))
+       )
+ )
+
+ (print (factorial_rec 3))
+ B.
+ (defun factorial_rec (x)
+    ( if  ( OR (< x 0) (= x 0)) 1
+            ( * x (factorial_rec (- x 1)))
+       )
+ )
+
+ (print (factorial_rec 3))
+ c.
+ (defun factorial_it (x)
+    (setq p 1)
+    (loop for i from 1 to x do
+       (setq p (* p i))
+    )
+    (print p)
+ )
+
+(factorial_it 3)
+
+7.
+(defun fib (x)
+    ( if  ( OR (= x 0) (= x 1)) 1
+            (+ (fib (- x 1)) (fib (- x 2)))
+       )
+ )
+
+ (print (fib 3))

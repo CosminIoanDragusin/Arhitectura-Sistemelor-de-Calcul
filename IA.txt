@@ -1,0 +1,132 @@
+Partea de IA
+
+1.Daca consideram operatorii definiti la nivel de camp,cati operatori sunt ncesari 
+pentru a-l muta pe 1 din starea initiala in strea scop?
+R:4
+
+2.Valoarea de adevar (((P → Q) ∨ P) → (Q ∨ ¬P))
+R:1101
+
+3.In ce conditii alg de cautare in latime(BFS) este complet?
+R:daca b(factorul de ramificare) e finit
+4.Utilizand metoda de cautare in adancime(DFS) alegeti metoda corecta 
+in care sunt vizitate nodurile
+
+			A
+		C	B	D
+	   E F  G H  I
+R:ACEFBGHDI	 
+
+5.                 durere_d       not(durere_d)
+    carie           0.02             0.08
+    not(carie)      0.06             0.84
+	
+P(carie)=0.02+0.08=0.1
+P(Carie si durere_d)=0.02+0.06+0.08=0.16
+P(carie|durere_d)=P(carie^durere_d)/P(durere_d)=0.02/0.08
+	
+6.¬(P∨Q)=¬P∧¬Q	formula asta este
+R:corect->tautologie(daca si numai daca e adevarata pentru toate interpretarile sale)
+inconsistenta(daca si numai daca e falsa pentru toate interpretarile
+contingenta -consistenta netautologica
+
+7.DEfiniti entitatile care se folosesc in reprezentarea spatiului problemei
+R:stari si operatori
+stare initiala
+stare scop
+operatori
+functia de evaluare
+
+8.Numiti criteriile de caracteruzare ale unui alg de cautare
+R:complexitate de spatiului
+complexitate de timp
+completitudine
+optimalitate
+informare
+capacitatea de revenire
+
+9.In ce conditii se poate afirma intr-un graf AND/OR ca un nod AND nu e rezolvabil
+-nod e rezolvabil daca
+	-e nod terminal
+	-e not neterminal ai carui succesori sunt noduri AND rezolvabile
+	-e nod neterminal ai carui succesori sunt noduri OR cel putin unul rezolvabil
+-nod nu e rezolvabil daca
+	-nod neterminal fara succesori
+	-nod neterminal ai carui succesori sunt noduri AND si cel putin unul e nerezolvabil
+	-nod neterminal ai carui succesori sunt noduri OR si toate sunt nerezolvabile
+
+
+10.F1=(P->Q)
+   F2=(Q->R)
+   G=(P->R)
+Este G o consecinta logica a lui F1 si F2?
+R:da
+
+11.Fie o prop compusa cu 6 variablie .Cate interpretari posibile are aceasta prop
+
+12.Metoda cu cost uniform(UCS)
+R:ACBFGED
+
+13.Problema cu ploaia si iarba uda
+ploua in 30 % din cazuri
+cand ploua exista sanse de 80% ca iarba sa fie uda
+cand nu ploua exista sanse de 15% ca iarba sa fie uda din alte cauze
+
+   
+Un algoritm este 
+optimal->dacă descoperă cea mai bună soluție din mai multe posibile. 
+complet->dacă garantează găsirea unei soluții dacă aceasta există
+
+Complexitatea unui algoritm este dată de:
+-timpul necesar găsirii soluției dat de: 
+	-b: factorului de ramificare (branching factor) al arborelui de căutare
+	-d: adâncimea soluției cu cost minim 
+	-m: adâncimea maximă a spațiului de stări (poate fi ∞)
+-spațiul de memorie necesar 
+
+
+
+BFS:
+-se fol lista FIFO
+-se iau nivelele pe rand si se adauga intr-o lista
+-optimal daca costul per pas e 1(in general nu e optimal)
+-complet daca b e finit
+
+UCS:
+-la fel ca BFS dar se dezvolta cu nodul cu costul cel mai mic
+-tot coada dar ordonata in functie decost
+-e optimala si completa(daca costul e mai mare ca un prag dat)
+
+
+DFS:
+-se duce pe un nod fiu si il parcurge in adancime pana canf e gasit nodul tinta sau nu mai sunt fii
+-lista de tip LIFO
+-complet doar in spatii finite
+-nu e optimal
+
+
+	
+	
+	Cautare informata:
+UCS+Greedy=A*
+-UCS(backward cost g(n))
+-Greedy(forward cost h(n))
+	
+	
+Alpha-beta Pruning
+-putem reteza pana la o jumatate de arbore de joc
+-daca vedem ca o mutare e prosta nu are rost sa urmrim mai departe
+-alfa-val cea mai mare
+-beta-val cea mai mica
+	
+	
+	Retele de incredere
+Teoria probabilitatii:
+-	
+
+
+
+Retele Bayesiene
+-se compun din noduri si arce
+-fiecre nod corespunde unei var X
+-daca e arc direct de la nodul X la nodul Y putem spune ca X are influenta directa asupra nodului Y
